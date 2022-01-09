@@ -21,7 +21,7 @@ jobs:
           key: ${{ runner.os }}-shards-${{ hashFiles('shard.yml') }}
           restore-keys: ${{ runner.os }}-shards-
       - name: Install shards
-        run: shards update --ignore-crystal-version
+        run: shards update
       - name: Run tests
         run: crystal spec --order=random --error-on-warnings
       - name: Build example
@@ -34,12 +34,12 @@ jobs:
       image: crystallang/crystal:latest-alpine
     steps:
       - name: Install packages
-        run: apk add unibilium unibilium-dev
+        run: apk add readline unibilium unibilium-dev
       - name: Download source
         uses: actions/checkout@v2
       - name: Build binaries
         run: |
-          shards update --production --release --static --no-debug --ignore-crystal-version
+          shards update --production --release --static --no-debug
           crystal build --time --release --static --no-debug -o bin/tech-demo examples/tech-demo.cr
           crystal build --time --release --static --no-debug -o bin/hello examples/hello.cr
           crystal build --time --release --static --no-debug -o bin/hello2 examples/hello2.cr
