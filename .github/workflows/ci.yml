@@ -35,7 +35,9 @@ jobs:
       image: crystallang/crystal:latest-alpine
     steps:
       - name: Install packages
-        run: apk add readline unibilium unibilium-dev
+        run: |
+          apk add readline unibilium unibilium-dev
+          ln -s /usr/lib/libreadline.so.8 /usr/lib/libreadline.so
       - name: Download source
         uses: actions/checkout@v2
       - name: Build binaries
