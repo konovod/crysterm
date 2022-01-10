@@ -14,7 +14,7 @@ jobs:
       - name: Install packages
         run: |
           apk add readline unibilium unibilium-dev
-          ls /usr/lib/x86_64*
+          find / -name libreadline*.so*
           ln -s /usr/lib/x86_64-alpine-linux-musl/libreadline.so.8 /usr/lib/x86_64-alpine-linux-musl/libreadline.so
       - name: Download source
         uses: actions/checkout@v2
